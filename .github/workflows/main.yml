@@ -19,3 +19,13 @@ jobs:
           git add .
           git commit -m "Update dados" || exit 0
           git push
+          - name: Rodar Scraper
+        run: python scraper_vv.py
+
+      - name: Salvar resultados
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add noticias_vv.csv feed_vila_velha_vv.xml
+          git commit -m "Update dados" || echo "Sem mudanças para salvar"
+          git push
